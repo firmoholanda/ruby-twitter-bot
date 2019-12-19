@@ -13,15 +13,24 @@ while true
     r_client = Twitter::REST::Client.new api_config
     s_client = Twitter::Streaming::Client.new(api_config)
 
-    # my topics to serach
-    topics = ["#ruby", "#rails", "#coding"]
+    # my topics to search
+    #topics = ["microverse", "microverseinc"]
+
+    topics = ["ruby", "rails", "coding"]
     
+    # puts found tweets
     s_client.filter(:track => topics.join(",")) do |tweet|
         if tweet.is_a?(Twitter::Tweet)
-          puts tweet.text 
+          puts "-----------------------------------------------------------------------------------------"
+          #puts tweet.text
+          puts "my twitter bot found that " + tweet.user.name + " is talking about ruby! from " + tweet.user.location
+          #r_client.update("my twitter bot found that " + tweet.user.name + " is talking about ruby! from " tweet.user.location)
           #r_client.fav tweet
+          #tweet.media.each{ |media| puts media.media_url.to_s }
         end
     end
+
+  # stop program 15 seconds if cant get data 
   rescue
     puts "error occurred, waiting for 15 seconds"
     sleep 15
