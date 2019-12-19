@@ -2,11 +2,12 @@ require "Twitter"
 require 'yaml'
 
 class TwitterBot
-  attr_accessor :topics_to_search
+  attr_accessor :topics_to_search, :display_wile_searching
   attr_reader :tweet_user, :tweet_location, :stored_tweets
 
-  def initialize(topics_to_search, tweet_user = Array.new)
+  def initialize(topics_to_search, display_wile_searching = true, tweet_user = Array.new, tweet_location = Array.new)
     @topics_to_search = topics_to_search
+    @display_wile_searching = display_wile_searching
     @tweet_user = tweet_user
     @tweet_location = tweet_location
     @stored_tweets = stored_tweets
@@ -37,9 +38,19 @@ class TwitterBot
       if tweet.is_a?(Twitter::Tweet)
         if tweet.user.location.instance_of?(String)
           tweet_user[stored_tweets] = tweet.user.name
-          #tweet_location[stored_tweets] = tweet.user.location
-          #puts "-----------------------------------------------------------------------------------------"
-          #puts tweet.user.name + " | " + tweet.user.location
+          tweet_location[stored_tweets] = tweet.user.location
+          
+          # should display the serach?
+          if display_wile_searching
+            puts "-----------------------------------------------------------------------------------------"
+            puts tweet.user.name + " | " + tweet.user.location
+          end
+
+          # should like the tweet?
+          if like_the_tweet
+
+          end
+
           stored_tweets +=1
         end
       end
@@ -48,14 +59,16 @@ class TwitterBot
     # exit function gracefully
     rescue Interrupt
       puts "\nfound: " + stored_tweets.to_s + " tweets!"
-      puts tweet_user[stored_tweets-1]
+      #puts tweet_user[stored_tweets-1]
+      #puts tweet_location[stored_tweets-1]
   end
 
 end
 
 # init aplication --------------------------------------------------------------------- #
 
-my_bot = TwitterBot.new(["ruby", "rails", "coding"])
+# TwitterBot.new (topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet, save_to_file)
+my_bot = TwitterBot.new(["ruby", "rails", "coding"], true, true)
 
 puts my_bot.stored_tweets
 
