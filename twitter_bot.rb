@@ -75,7 +75,7 @@ end
 # init aplication --------------------------------------------------------------------- #
 
 # TwitterBot.new (topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet, save_to_file)
-my_bot = TwitterBot.new(["ruby", "rails", "coding"], true, false, true)
+#my_bot = TwitterBot.new(["ruby", "rails", "coding"], true, false, true)
 
-#puts my_bot.stored_tweets
 
+my_bot = TwitterBot.new(["test_ermin"], true, false, true)
