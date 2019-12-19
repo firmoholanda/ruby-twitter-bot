@@ -13,4 +13,18 @@ while true
     r_client = Twitter::REST::Client.new api_config
     s_client = Twitter::Streaming::Client.new(api_config)
 
+    # my topics to serach
+    topics = ["#ruby", "#rails", "#coding"]
+    
+    s_client.filter(:track => topics.join(",")) do |tweet|
+        if tweet.is_a?(Twitter::Tweet)
+          puts tweet.text 
+          #r_client.fav tweet
+        end
+    end
+  rescue
+    puts "error occurred, waiting for 15 seconds"
+    sleep 15
+  end
+
 end
