@@ -1,12 +1,17 @@
 require "Twitter"
+require 'yaml'
 
 class TwitterBot
   attr_accessor :topics_to_search
+  attr_reader :tweet_user, :tweet_location, :stored_tweets
 
-  def initialize(topics_to_search)
+  def initialize(topics_to_search, tweet_user = Array.new)
     @topics_to_search = topics_to_search
+    @tweet_user = tweet_user
+    @tweet_location = tweet_location
+    @stored_tweets = stored_tweets
     connect_to_api
-    puts_found_tweets
+    find_tweets
   end
 
   # connect to twitter api
@@ -19,41 +24,38 @@ class TwitterBot
     }
     @@r_client = Twitter::REST::Client.new @@api_config
     @@s_client = Twitter::Streaming::Client.new(@@api_config)
+    puts "\nconnected to api..."
   end
 
-  # puts found tweets
-  def puts_found_tweets
-
-    @@s_client.filter(:track => topics_to_search) do |tweet|
+  # find tweets
+  def find_tweets
+    puts "gathering tweets..."
+    puts "\npress ctrl-c to stop"
+    
+    stored_tweets = 0
+    @@s_client.filter(:track => topics_to_search.join(",")) do |tweet|
       if tweet.is_a?(Twitter::Tweet)
         if tweet.user.location.instance_of?(String)
-          puts "-----------------------------------------------------------------------------------------"
-          puts tweet.user.name + " | " + tweet.user.location
+          tweet_user[stored_tweets] = tweet.user.name
+          #tweet_location[stored_tweets] = tweet.user.location
+          #puts "-----------------------------------------------------------------------------------------"
+          #puts tweet.user.name + " | " + tweet.user.location
+          stored_tweets +=1
         end
       end
     end
 
-    # stop program 15 seconds if cant get data 
-    #rescue
-    #  puts "error occurred, waiting for 5 seconds..."
-    #  sleep 5
-
+    # exit function gracefully
+    rescue Interrupt
+      puts "\nfound: " + stored_tweets.to_s + " tweets!"
+      puts tweet_user[stored_tweets-1]
   end
 
 end
 
-my_bot = TwitterBot.new("ruby")
+# init aplication --------------------------------------------------------------------- #
 
+my_bot = TwitterBot.new(["ruby", "rails", "coding"])
 
-#loop do
+puts my_bot.stored_tweets
 
-  #puts "Press ctrl-c to stop"
-
-  #begin
-
-  # exit program gracefully
-  #rescue Interrupt
-  #  puts "end"
-  #  exit
-
-#end
