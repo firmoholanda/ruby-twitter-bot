@@ -2,7 +2,7 @@ require "Twitter"
 require 'yaml'
 
 class TwitterBot
-  attr_accessor :topics_to_search, :display_wile_searching, :like_the_tweet
+  attr_accessor :topics_to_search, :display_wile_searching, :like_the_tweet, :alert_in_new_tweet
   attr_reader :tweet_user, :tweet_location, :stored_tweets
 
   def initialize(topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet, tweet_user = Array.new, tweet_location = Array.new)
@@ -42,7 +42,7 @@ class TwitterBot
           tweet_user[stored_tweets] = tweet.user.name
           tweet_location[stored_tweets] = tweet.user.location
           
-          # should display the serach?
+          # should display the search?
           if display_wile_searching
             puts "-----------------------------------------------------------------------------------------"
             puts tweet.user.name + " | " + tweet.user.location
@@ -55,7 +55,7 @@ class TwitterBot
 
           # shuld create a new tweet alerting?
           if alert_in_new_tweet
-            @@r_client.update("my twitter bot found that " + tweet.user.name + " is talking about " + topics_to_search + "! from " tweet.user.location)
+            @@r_client.update("my twitter bot found that " + tweet.user.name + " is talking about " + topics_to_search.join(", ") + "! from " + tweet.user.location)
           end
 
           stored_tweets +=1
@@ -75,7 +75,7 @@ end
 # init aplication --------------------------------------------------------------------- #
 
 # TwitterBot.new (topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet, save_to_file)
-my_bot = TwitterBot.new(["ruby", "rails", "coding"], true, false)
+my_bot = TwitterBot.new(["ruby", "rails", "coding"], true, false, true)
 
 #puts my_bot.stored_tweets
 
