@@ -1,6 +1,8 @@
 require "Twitter"
 
-while true
+loop do
+
+  puts "Press ctrl-c to stop"
 
   begin
     # connect to twitter api
@@ -14,16 +16,24 @@ while true
     s_client = Twitter::Streaming::Client.new(api_config)
 
     # my topics to search
-    #topics = ["microverse", "microverseinc"]
-
+    #topics = ["microverseinc"]
     topics = ["ruby", "rails", "coding"]
+    #topics = ["trump"]
     
     # puts found tweets
     s_client.filter(:track => topics.join(",")) do |tweet|
         if tweet.is_a?(Twitter::Tweet)
-          puts "-----------------------------------------------------------------------------------------"
+          
           #puts tweet.text
-          puts "my twitter bot found that " + tweet.user.name + " is talking about ruby! from " + tweet.user.location
+          
+          #puts tweet.user.location.class
+
+          if tweet.user.location.instance_of?(String)
+            puts "-----------------------------------------------------------------------------------------"
+            #puts "my twitter bot found that " + tweet.user.name + " is talking about ruby! from " + tweet.user.location
+            puts tweet.user.name + " | " + tweet.user.location
+          end
+
           #r_client.update("my twitter bot found that " + tweet.user.name + " is talking about ruby! from " tweet.user.location)
           #r_client.fav tweet
           #tweet.media.each{ |media| puts media.media_url.to_s }
@@ -32,8 +42,13 @@ while true
 
   # stop program 15 seconds if cant get data 
   rescue
-    puts "error occurred, waiting for 15 seconds"
+    puts "error occurred, waiting for 15 seconds..."
     sleep 15
   end
+
+  # exit program gracefully
+  rescue Interrupt
+    puts "end"
+    exit
 
 end
