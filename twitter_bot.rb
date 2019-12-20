@@ -70,11 +70,17 @@ class TwitterBot
   end
 
   def retrieve_stored_tweets
-    stored_tweets = YAML.load(File.read("stored_tweets.yml"))
+    @stored_tweets = YAML.load(File.read("stored_tweets.yml"))
+    @total_stored_tweets = @stored_tweets.length 
   end
 
   def display_stored_tweets
-    puts stored_tweets
+    puts "-----------------------------------------------------------------------------------------"
+    stored_tweets.each do |key, value|
+      puts key + ' | ' + value
+    end
+    puts "-----------------------------------------------------------------------------------------"
+    puts "found: " + total_stored_tweets.to_s + " tweets!"
   end
 
 end
@@ -85,7 +91,8 @@ end
 my_bot = TwitterBot.new
 
 #my_bot.find_tweets(["trump"], true, false, false)
-
 #my_bot.save_stored_tweets
+
 my_bot.retrieve_stored_tweets
 my_bot.display_stored_tweets
+
