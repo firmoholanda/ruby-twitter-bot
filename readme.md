@@ -2,17 +2,26 @@
 
 this is a capstone project from microverse.
 
-on this project i am going to build a bot in ruby, using twitter's api.
+on this project i build a bot in ruby, using twitter's api. it was created with the intent of storing the location originated from the found tweet so i could quantize what part of the globe was more active on the search topic.
+with this bot one can: 
+- search for topics;
+- display results wile searching;
+- auto like found tweets;
+- create new tweet informing the bot found it;
+- save to local storage using yml;
+- retrieve from local storage;
+- display top 10 locations from found tweets.
 
 
 
 ## 📡 technologies used
 
 - ruby
-- github
 - twitter api
+- yml
+- github
 
-basic ruby and github was used on this project.
+ruby, twitter api, yml and github was used on this project.
 
 
 
