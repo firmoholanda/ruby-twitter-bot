@@ -22,7 +22,7 @@ this project can be found in https://github.com/firmoholanda/ruby-twitter-bot
 
 ### ✨ [code picture]
 
-<img alt="project image" src="https://github.com/firmoholanda/ruby-twitter-bot.png"/>
+<img alt="project image" src="https://github.com/firmoholanda/ruby-twitter-bot/blob/features/img/screen.png"/>
 
 
 
