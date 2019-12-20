@@ -75,19 +75,31 @@ class TwitterBot
   end
 
   def display_stored_tweets
-    puts "-----------------------------------------------------------------------------------------"
-    stored_tweets.each do |key, value|
-      puts key + ' | ' + value
-    end
-    puts "-----------------------------------------------------------------------------------------"
-    puts "found: " + total_stored_tweets.to_s + " tweets!"
+    hash_display(stored_tweets)
   end
 
+  def display_top_10_locations
+    location_frequency = Hash.new(0)
+    stored_tweets.values.each { |v| location_frequency.store(v, location_frequency[v]+1) }
+    location_frequency = location_frequency.sort_by {|key, value| value}.to_h
+    top_10_locations = location_frequency.max_by(10, &:last).to_h
+    hash_display(top_10_locations)    
+  end
+
+  def hash_display(hash)
+    puts "-----------------------------------------------------------------------------------------"
+    hash.each do |key, value|
+      puts key.to_s + ' | ' + value.to_s
+    end
+    puts "-----------------------------------------------------------------------------------------"
+    puts "found: " + hash.length.to_s + " items!"
+  end
+  
 end
 
 # init aplication --------------------------------------------------------------------- #
 
-# TwitterBot.new (topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet, save_to_file)
+# TwitterBot.new (topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet)
 my_bot = TwitterBot.new
 
 #my_bot.find_tweets(["trump"], true, false, false)
@@ -96,3 +108,4 @@ my_bot = TwitterBot.new
 my_bot.retrieve_stored_tweets
 my_bot.display_stored_tweets
 
+#my_bot.display_top_10_locations
