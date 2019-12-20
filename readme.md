@@ -80,4 +80,3 @@ give a ⭐️ if you like this project!
 ## 📝 license
 
 this project is [MIT](https://github.com/firmoholanda/newsweek.com-clone/development/blob/development/license.txt) licensed.
- 
