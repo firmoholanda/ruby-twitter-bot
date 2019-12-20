@@ -93,9 +93,9 @@ end
 
 # init aplication --------------------------------------------------------------------- #
 
-# TwitterBot.new (topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet)
 my_bot = TwitterBot.new
 
+# my_bot.find_tweets(topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet)
 my_bot.find_tweets(["ruby", "rails", "code"], true, false, false)
 my_bot.save_stored_tweets
 
