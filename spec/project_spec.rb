@@ -1,4 +1,4 @@
-require "./lib/twitter_bot.rb"
+require "./bin/twitter_bot.rb"
 
 # TwitterBot -------------------------------------------------------------------------- #
 RSpec.describe TwitterBot do
