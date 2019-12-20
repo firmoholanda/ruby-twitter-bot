@@ -3,18 +3,16 @@ require 'yaml'
 
 class TwitterBot
   attr_accessor :topics_to_search, :display_wile_searching, :like_the_tweet, :alert_in_new_tweet
-  attr_reader :tweet_user, :tweet_location, :stored_tweets
+  attr_reader :stored_tweets, :total_stored_tweets
 
-  def initialize(topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet, tweet_user = Array.new, tweet_location = Array.new)
+  def initialize(stored_tweets = Hash.new)
     @topics_to_search = topics_to_search
     @display_wile_searching = display_wile_searching
     @like_the_tweet = like_the_tweet
     @alert_in_new_tweet = alert_in_new_tweet
-    @tweet_user = tweet_user
-    @tweet_location = tweet_location
     @stored_tweets = stored_tweets
+    @total_stored_tweets = total_stored_tweets
     connect_to_api
-    find_tweets
   end
 
   # connect to twitter api
@@ -31,16 +29,15 @@ class TwitterBot
   end
 
   # find tweets
-  def find_tweets
+  def find_tweets(topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet)
     puts "gathering tweets..."
     puts "\npress ctrl-c to stop"
     
-    stored_tweets = 0
+    total_stored_tweets = 0
     @@s_client.filter(:track => topics_to_search.join(",")) do |tweet|
       if tweet.is_a?(Twitter::Tweet)
         if tweet.user.location.instance_of?(String)
-          tweet_user[stored_tweets] = tweet.user.name
-          tweet_location[stored_tweets] = tweet.user.location
+          stored_tweets[tweet.user.name] = tweet.user.location
           
           # should display the search?
           if display_wile_searching
@@ -58,16 +55,26 @@ class TwitterBot
             @@r_client.update("my twitter bot found that " + tweet.user.name + " is talking about " + topics_to_search.join(", ") + "! from " + tweet.user.location)
           end
 
-          stored_tweets +=1
+          total_stored_tweets +=1
         end
       end
     end
 
     # exit function gracefully
     rescue Interrupt
-      puts "\nfound: " + stored_tweets.to_s + " tweets!"
-      #puts tweet_user[stored_tweets-1]
-      #puts tweet_location[stored_tweets-1]
+      puts "\nfound: " + total_stored_tweets.to_s + " tweets!"
+  end
+
+  def save_stored_tweets
+    File.open("stored_tweets.yml", "w") { |file| file.write(stored_tweets.to_yaml) }
+  end
+
+  def retrieve_stored_tweets
+    stored_tweets = YAML.load(File.read("stored_tweets.yml"))
+  end
+
+  def display_stored_tweets
+    puts stored_tweets
   end
 
 end
@@ -75,7 +82,10 @@ end
 # init aplication --------------------------------------------------------------------- #
 
 # TwitterBot.new (topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet, save_to_file)
-#my_bot = TwitterBot.new(["ruby", "rails", "coding"], true, false, true)
+my_bot = TwitterBot.new
 
+#my_bot.find_tweets(["trump"], true, false, false)
 
-my_bot = TwitterBot.new(["test_ermin"], true, false, true)
+#my_bot.save_stored_tweets
+my_bot.retrieve_stored_tweets
+my_bot.display_stored_tweets
