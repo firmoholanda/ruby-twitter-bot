@@ -36,7 +36,7 @@ this project can be found in https://github.com/firmoholanda/ruby-twitter-bot
 the instructions are as follows to download and run this bot:
 
 usage:
-- to run the game make sure to give execute permission to the twitter_bot.rb
+- to run the bot make sure to give execute permission to the twitter_bot.rb
 ``` 
 chmod +x bin/twitter_bot.rb
 ```
@@ -57,7 +57,7 @@ ruby ./bin/twitter_bot.rb
 
 contributions, issues and feature requests are welcome!<br/>Feel free to check [issues page](https://github.com/firmoholanda/ruby-enumerable-methods/development/issues).
 
-1. fork it (https://github.com/firmoholanda/ruby-enumerable-methods/development/fork)
+1. fork it (https://github.com/firmoholanda/ruby-twitter-bot/development/fork)
 2. create your working branch (git checkout -b [choose-a-name])
 3. commit your changes (git commit -am 'what this commit will fix/add/improve')
 4. push to the branch (git push origin [chosen-name])
