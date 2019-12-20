@@ -33,7 +33,7 @@ this project can be found in https://github.com/firmoholanda/ruby-twitter-bot
 
 ## 🔨 instructions
 
-this is the instruction to download and run this bot:
+the instructions are as follows to download and run this bot:
 
 usage:
 - to run the game make sure to give execute permission to the twitter_bot.rb
