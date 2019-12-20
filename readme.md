@@ -29,6 +29,24 @@ ruby, twitter api, yml and github was used on this project.
 
 this project can be found in https://github.com/firmoholanda/ruby-twitter-bot
 
+
+
+## 🔨 instructions
+
+this is the instruction to download and run this bot:
+
+usage:
+- to run the game make sure to give execute permission to the twitter_bot.rb
+``` 
+chmod +x bin/twitter_bot.rb
+```
+- after that you can start the bot by running 
+``` 
+ruby ./bin/twitter_bot.rb
+```
+
+
+
 ### ✨ [code picture]
 
 <img alt="project image" src="https://github.com/firmoholanda/ruby-twitter-bot/blob/features/img/screen.png"/>
