@@ -4,8 +4,8 @@ require_relative "./twitter_bot.rb"
 RSpec.describe TwitterBot do
   let(:my_bot) { TwitterBot.new }
 
-  # initialize
-  describe "#initialize" do
+  # hash_display(hash)
+  describe "#hash_display" do
     it "initialize empty board to 9 - items" do
       expect(board.board).to eql( ["-", "-", "-", "-", "-", "-", "-", "-" ,"-"] )
     end

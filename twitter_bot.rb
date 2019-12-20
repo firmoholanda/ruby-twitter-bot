@@ -15,6 +15,9 @@ class TwitterBot
     connect_to_api
   end
 
+  # private methos -------------------------------------------------------------------- #
+  private
+
   def connect_to_api
     @@api_config = {
         consumer_key:        "niJqBHvcmyePEiiD1LHFI1HnO",
@@ -26,6 +29,18 @@ class TwitterBot
     @@s_client = Twitter::Streaming::Client.new(@@api_config)
     puts "\nconnected to api..."
   end
+    
+  def hash_display(hash)
+    puts "-----------------------------------------------------------------------------------------"
+    hash.each do |key, value|
+      puts key.to_s + ' | ' + value.to_s
+    end
+    puts "-----------------------------------------------------------------------------------------"
+    puts "found: " + hash.length.to_s + " items!"
+  end
+
+  # public methos -------------------------------------------------------------------- #
+  public
 
   def find_tweets(topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet)
     puts "gathering tweets..."
@@ -78,15 +93,6 @@ class TwitterBot
     location_frequency = location_frequency.sort_by {|key, value| value}.to_h
     top_10_locations = location_frequency.max_by(10, &:last).to_h
     hash_display(top_10_locations)    
-  end
-
-  def hash_display(hash)
-    puts "-----------------------------------------------------------------------------------------"
-    hash.each do |key, value|
-      puts key.to_s + ' | ' + value.to_s
-    end
-    puts "-----------------------------------------------------------------------------------------"
-    puts "found: " + hash.length.to_s + " items!"
   end
 
 end
