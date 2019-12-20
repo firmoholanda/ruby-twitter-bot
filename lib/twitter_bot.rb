@@ -46,7 +46,7 @@ class TwitterBot
     puts "gathering tweets..."
     puts "\npress ctrl-c to stop"
     
-    total_stored_tweets = 0
+    @total_stored_tweets = 0
     @@s_client.filter(:track => topics_to_search.join(",")) do |tweet|
       if tweet.is_a?(Twitter::Tweet)
         if tweet.user.location.instance_of?(String)
@@ -65,13 +65,13 @@ class TwitterBot
             @@r_client.update("my twitter bot found that " + tweet.user.name + " is talking about " + topics_to_search.join(", ") + "! from " + tweet.user.location)
           end
 
-          total_stored_tweets +=1
+          @total_stored_tweets +=1
         end
       end
     end
     
     rescue Interrupt # exit function gracefully
-      puts "\nfound: " + total_stored_tweets.to_s + " tweets!"
+      puts "\nfound: " + @total_stored_tweets.to_s + " tweets!"
   end
 
   def save_stored_tweets
@@ -99,11 +99,12 @@ end
 
 # init aplication --------------------------------------------------------------------- #
 
-my_bot = TwitterBot.new
+#my_bot = TwitterBot.new
 
 # my_bot.find_tweets(topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet)
-my_bot.find_tweets(["ruby", "rails", "code"], true, false, false)
-my_bot.save_stored_tweets
+#my_bot.find_tweets(["ruby", "rails", "code"], true, false, false)
+##my_bot.save_stored_tweets
+#puts my_bot.total_stored_tweets
 
 #my_bot.retrieve_stored_tweets
 #my_bot.display_stored_tweets
