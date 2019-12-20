@@ -15,7 +15,6 @@ class TwitterBot
     connect_to_api
   end
 
-  # connect to twitter api
   def connect_to_api
     @@api_config = {
         consumer_key:        "niJqBHvcmyePEiiD1LHFI1HnO",
@@ -28,7 +27,6 @@ class TwitterBot
     puts "\nconnected to api..."
   end
 
-  # find tweets
   def find_tweets(topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet)
     puts "gathering tweets..."
     puts "\npress ctrl-c to stop"
@@ -39,19 +37,16 @@ class TwitterBot
         if tweet.user.location.instance_of?(String)
           stored_tweets[tweet.user.name] = tweet.user.location
           
-          # should display the search?
-          if display_wile_searching
+          if display_wile_searching # should display the search?
             puts "-----------------------------------------------------------------------------------------"
             puts tweet.user.name + " | " + tweet.user.location
           end
 
-          # should like the tweet?
-          if like_the_tweet
+          if like_the_tweet # should like the tweet?
             @@r_client.fav tweet
           end
 
-          # shuld create a new tweet alerting?
-          if alert_in_new_tweet
+          if alert_in_new_tweet # shuld create a new tweet alerting?
             @@r_client.update("my twitter bot found that " + tweet.user.name + " is talking about " + topics_to_search.join(", ") + "! from " + tweet.user.location)
           end
 
@@ -59,9 +54,8 @@ class TwitterBot
         end
       end
     end
-
-    # exit function gracefully
-    rescue Interrupt
+    
+    rescue Interrupt # exit function gracefully
       puts "\nfound: " + total_stored_tweets.to_s + " tweets!"
   end
 
@@ -94,7 +88,7 @@ class TwitterBot
     puts "-----------------------------------------------------------------------------------------"
     puts "found: " + hash.length.to_s + " items!"
   end
-  
+
 end
 
 # init aplication --------------------------------------------------------------------- #
@@ -102,10 +96,9 @@ end
 # TwitterBot.new (topics_to_search, display_wile_searching, like_the_tweet, alert_in_new_tweet)
 my_bot = TwitterBot.new
 
-#my_bot.find_tweets(["trump"], true, false, false)
-#my_bot.save_stored_tweets
+my_bot.find_tweets(["ruby", "rails", "code"], true, false, false)
+my_bot.save_stored_tweets
 
-my_bot.retrieve_stored_tweets
-my_bot.display_stored_tweets
-
+#my_bot.retrieve_stored_tweets
+#my_bot.display_stored_tweets
 #my_bot.display_top_10_locations
