@@ -72,22 +72,29 @@ change lines 23, 24, 25 and 26 on the bin/twitter_bot.rb file, with your informa
       access_token_secret: "YOUR_ACCESS_TOKEN_SECRET"
   }
   ```
-  
-3. 
 
-usage:
+3. install dependencies;
 
-- at the end of bin/twitter_bot.rb
-``` 
-my_bot = TwitterBot.new
-``` 
-
-- after that, you can start the bot by running 
-``` 
-ruby ./bin/twitter_bot.rb
+```
+gem install twitter
 ```
 
 
+usage:
+
+- after that, you can start the bot by running 
+
+``` 
+ruby ./bin/examples.rb
+```
+
+it will initialize the application, look for tweets related to ruby codding and display information on the terminal. then, it will display the top 10 locations sorted in ascending order and then save that information on a yml file called: stored_tweets.yml
+```
+my_bot = TwitterBot.new
+my_bot.find_tweets([["ruby", "rayls", "coding"], true, false, false)	
+my_bot.display_top_10_locations	
+my_bot.save_stored_tweets	
+```
 
 ### ✨ [code picture]
 
