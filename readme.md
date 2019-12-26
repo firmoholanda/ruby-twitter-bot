@@ -88,13 +88,24 @@ usage:
 ruby ./bin/examples.rb
 ```
 
-it will initialize the application, look for tweets related to ruby codding and display information on the terminal. then, it will display the top 10 locations sorted in ascending order and then save that information on a yml file called: stored_tweets.yml
+it will initialize the application, look for tweets related to ruby codding, display information on the terminal, like the found tweet and create a new tweet informing what was found. then, it will display the top 10 locations sorted in ascending order and then save that information on a yml file called: stored_tweets.yml
+
+like_the_tweet, alert_in_new_tweet
+
 ```
 my_bot = TwitterBot.new
-my_bot.find_tweets([["ruby", "rayls", "coding"], true, false, false)	
+my_bot.find_tweets([["ruby", "rayls", "coding"], true, true, true)
 my_bot.display_top_10_locations	
 my_bot.save_stored_tweets	
 ```
+
+you can also use:
+```
+my_bot.retrieve_stored_tweets	
+my_bot.display_stored_tweets
+```
+to load information from stored_tweets.yml to the class and then display on the terminal.
+
 
 ### ✨ [code picture]
 
