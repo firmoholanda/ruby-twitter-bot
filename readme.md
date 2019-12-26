@@ -5,12 +5,12 @@ this is a capstone project from microverse.
 on this project i build a bot in ruby, using twitter's api. it was created with the intent of storing the location originated from the found tweet so i could quantize what part of the globe was more active on the search topic.
 with this bot one can: 
 - search for topics;
-- display results wile searching;
+- display results while searching;
 - auto like found tweets;
 - create new tweet informing the bot found it;
 - save to local storage using yml;
 - retrieve from local storage;
-- display top 10 locations from found tweets.
+- display the top 10 locations from found tweets.
 
 
 
@@ -35,12 +35,43 @@ this project can be found in https://github.com/firmoholanda/ruby-twitter-bot
 
 the instructions are as follows to download and run this bot:
 
-usage:
-- to run the bot make sure to give execute permission to the twitter_bot.rb
+download:
+1. clone the source repository from Github.
+
+on the command line, enter:
+git clone https://github.com/firmoholanda/ruby-twitter-bot.git 
+
+or you can use Github for Windows or Github for Mac instead of the command line. go to: https://github.com/firmoholanda/ruby-twitter-bot, and click on the "Clone or download" green button.
+
+2. extract files to the desired location;
+
+3. cd (change directory) to extracted directory;
+
+4. give execute permission to the twitter_bot.rb
 ``` 
 chmod +x bin/twitter_bot.rb
 ```
-- after that you can start the bot by running 
+
+installation:
+
+1. create a twitter api account:
+to start using the Twitter api, you need to [register your application with Twitter](https://apps.twitter.com/). registration requires you to answer some questions about your application and agree to the [Twitter api terms of use](https://dev.twitter.com/overview/terms/agreement-and-policy).
+your new application will be assigned a consumer key/secret pair that identifies your application to Twitter.
+
+2. 
+change lines 23, 24, 25 and 26 on the twitter_bot.rb file, with your information:
+  ```
+  @@api_config = {
+      consumer_key:        "YOUR_CONSUMER_KEY",
+      consumer_secret:     "YOUR_CONSUMER_SECRET",
+      access_token:        "YOUR_ACCESS_TOKEN",
+      access_token_secret: "YOUR_ACCESS_TOKEN_SECRET"
+  }
+  ```
+
+usage:
+
+- after that, you can start the bot by running 
 ``` 
 ruby ./bin/twitter_bot.rb
 ```
@@ -55,7 +86,7 @@ ruby ./bin/twitter_bot.rb
 
 ## 🤝 contributing
 
-contributions, issues and feature requests are welcome!<br/>Feel free to check [issues page](https://github.com/firmoholanda/ruby-enumerable-methods/development/issues).
+contributions, issues, and feature requests are welcome!<br/>feel free to check [issues page](https://github.com/firmoholanda/ruby-enumerable-methods/development/issues).
 
 1. fork it (https://github.com/firmoholanda/ruby-twitter-bot/development/fork)
 2. create your working branch (git checkout -b [choose-a-name])
