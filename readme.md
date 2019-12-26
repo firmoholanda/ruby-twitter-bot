@@ -38,10 +38,10 @@ the instructions are as follows to download and run this bot:
 download:
 1. clone the source repository from Github.
 
-on the command line, enter:
-git clone https://github.com/firmoholanda/ruby-twitter-bot.git 
+  on the command line, enter:
+  git clone https://github.com/firmoholanda/ruby-twitter-bot.git 
 
-or you can use Github for Windows or Github for Mac instead of the command line. go to: https://github.com/firmoholanda/ruby-twitter-bot, and click on the "Clone or download" green button.
+  or you can use Github for Windows or Github for Mac instead of the command line. go to: https://github.com/firmoholanda/ruby-twitter-bot, and click on the "Clone or download" green button.
 
 2. extract files to the desired location;
 
@@ -54,12 +54,14 @@ chmod +x bin/twitter_bot.rb
 
 installation:
 
-1. create a twitter api account:
+1. create a twitter api account;
+
 to start using the Twitter api, you need to [register your application with Twitter](https://apps.twitter.com/). registration requires you to answer some questions about your application and agree to the [Twitter api terms of use](https://dev.twitter.com/overview/terms/agreement-and-policy).
 your new application will be assigned a consumer key/secret pair that identifies your application to Twitter.
 
-2. 
-change lines 23, 24, 25 and 26 on the twitter_bot.rb file, with your information:
+2. insert your api keys and secret;
+
+change lines 23, 24, 25 and 26 on the bin/twitter_bot.rb file, with your information:
   ```
   @@api_config = {
       consumer_key:        "YOUR_CONSUMER_KEY",
