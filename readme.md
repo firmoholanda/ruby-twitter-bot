@@ -88,7 +88,7 @@ usage:
 ruby ./bin/examples.rb
 ```
 
-it will initialize the application, look for tweets related to ruby codding, display information on the terminal, like the found tweet and create a new tweet informing what was found. then, it will display the top 10 locations sorted in ascending order and then save that information on a yml file called: stored_tweets.yml
+it will initialize the application, look for tweets related to ruby coding, display information on the terminal, like the found tweet and create a new tweet informing what was found. then, it will display the top 10 locations sorted in ascending order and then save that information on a yml file called: stored_tweets.yml
 
 like_the_tweet, alert_in_new_tweet
 
