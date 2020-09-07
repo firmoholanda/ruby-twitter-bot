@@ -2,7 +2,8 @@
 
 this is a capstone project from microverse.
 
-on this project i build a bot in ruby, using twitter's api. it was created with the intent of storing the location originated from the found tweet so i could quantize what part of the globe was more active on the search topic.
+this bot was built in ruby, using twitter's API. it was created to store the location of any given tweet in order to analyze which countries most spoke about particular topics.
+
 with this bot one can: 
 - search for topics;
 - display results while searching;
